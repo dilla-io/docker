@@ -8,7 +8,9 @@ Docker image tools for Dilla Engine, including
 
 - [Rust fmt](https://github.com/rust-lang/rustfmt)
 - [Clippy](https://github.com/rust-lang/rust-clippy)
-- [Binary install](https://crates.io/crates/cargo-binstall)
+- [Cargo binary install](https://crates.io/crates/cargo-binstall)
+- [Just](https://github.com/casey/just)
+- NodeJS, required for [jco](https://github.com/bytecodealliance/jco)
 
 Used by the project directly
 
@@ -17,4 +19,4 @@ Used by the project directly
 - [wasm-tools](https://github.com/bytecodealliance/wasm-tools)
 - [wasm-bindgen-cli](https://github.com/rustwasm/wasm-bindgen)
 - [cargo-component](https://crates.io/crates/cargo-component)
-- [node](https://github.com/nvm-sh/nvm)
+- [cargo-tarpaulin](https://crates.io/crates/cargo-tarpaulin)

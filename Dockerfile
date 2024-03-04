@@ -2,8 +2,7 @@ FROM node:latest AS node_base
 
 FROM rust:latest
 
-ARG NODE_VERSION=21
-ARG IMAGE_VERSION=1.0.0
+ARG IMAGE_VERSION=1.1.0
 ARG GITHUB_TOKEN
 
 ARG USERNAME=rusty
@@ -30,11 +29,6 @@ RUN \
   useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
 RUN \
-  # mkdir -p /etc/apt/keyrings ; \
-  # curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
-  #   | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg ; \
-  # echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_VERSION}.x nodistro main" \
-  #   > /etc/apt/sources.list.d/nodesource.list ; \
   apt-get update ; \
   apt-get install --no-install-recommends -y \
     bash \
@@ -43,7 +37,6 @@ RUN \
     make \
     cmake \
     sudo ; \
-    # nodejs ; \
   echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME ; \
   chmod 0440 /etc/sudoers.d/$USERNAME ; \
   apt-get clean ; \
@@ -59,7 +52,12 @@ RUN \
 
 RUN \
   cargo binstall -y \
-    cargo-workspaces wasm-tools wasm-opt wasm-bindgen-cli cargo-component
+    cargo-workspaces wasm-tools wasm-opt wasm-bindgen-cli cargo-component cargo-tarpaulin ; \
+  # Just
+  cd /var/tmp && curl -sL "$(curl -s https://api.github.com/repos/casey/just/releases/latest | grep browser_download_url | cut -d \" -f4 | grep -E 'x86_64-unknown-linux-musl.tar.gz')" | tar zx ; \
+  mv /var/tmp/just /usr/local/bin/ ; \
+  chmod +x /usr/local/bin/just ; \
+  rm -rf /var/tmp/*
 
 RUN \
   npm install -g npm
