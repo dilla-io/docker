@@ -2,9 +2,9 @@
 
 Share your design systems in a tiny universal package. [https://dilla.io](https://dilla.io)
 
-## Docker tools image
+## Docker tools image for Dilla Engine
 
-Docker image tools for Dilla Engine, including
+Docker image tools for [Dilla Engine](https://gitlab.com/dilla-io/engine), including
 
 - [Rust fmt](https://github.com/rust-lang/rustfmt)
 - [Clippy](https://github.com/rust-lang/rust-clippy)
@@ -14,9 +14,19 @@ Docker image tools for Dilla Engine, including
 
 Used by the project directly
 
-- [cargo-workspaces](https://crates.io/crates/cargo-workspaces)
-- [wasm-opt](https://github.com/WebAssembly/binaryen)
-- [wasm-tools](https://github.com/bytecodealliance/wasm-tools)
-- [wasm-bindgen-cli](https://github.com/rustwasm/wasm-bindgen)
 - [cargo-component](https://crates.io/crates/cargo-component)
 - [cargo-tarpaulin](https://crates.io/crates/cargo-tarpaulin)
+- [wasm-opt](https://github.com/WebAssembly/binaryen)
+- [wasm-bindgen-cli](https://github.com/rustwasm/wasm-bindgen)
+
+## Tests
+
+Tests against this Docker container and what's inside.
+
+`GITHUB_TOKEN` is optional, but allow faster download for cargo binstall to avoid build.
+See [Github Tate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+
+```shell
+GITHUB_TOKEN=_MY_TOKEN_ make build
+make test
+```

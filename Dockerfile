@@ -9,7 +9,7 @@ ARG USERNAME=rusty
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 
-ENV github_token=$GITHUB_TOKEN
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
 
 LABEL name="dillaio/docker"
 LABEL maintainer="Jean Valverde <jean@dilla.io>"
@@ -51,8 +51,8 @@ RUN \
   curl -fsSL --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
 RUN \
-  cargo binstall -y \
-    cargo-workspaces wasm-tools wasm-opt wasm-bindgen-cli cargo-component cargo-tarpaulin ; \
+  cargo binstall --no-confirm \
+    cargo-component cargo-tarpaulin wasm-opt wasm-bindgen-cli ; \
   # Just
   cd /var/tmp && curl -sL "$(curl -s https://api.github.com/repos/casey/just/releases/latest | grep browser_download_url | cut -d \" -f4 | grep -E 'x86_64-unknown-linux-musl.tar.gz')" | tar zx ; \
   mv /var/tmp/just /usr/local/bin/ ; \
@@ -61,6 +61,11 @@ RUN \
 
 RUN \
   npm install -g npm
+
+COPY ./tests/ /tests/
+
+RUN \
+  chmod +x /tests/*.sh
 
 USER $USERNAME
 

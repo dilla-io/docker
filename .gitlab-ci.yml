@@ -26,7 +26,11 @@ build:
       fi
     - echo "Build and push $RELEASE_IMAGE/$IMAGE_NAME$tag"
     - docker build --tag "$RELEASE_IMAGE/$IMAGE_NAME${tag}" --build-arg="GITHUB_TOKEN=$GITHUB_TOKEN" .
+    - ./.gitlab-ci/run-tests.sh $RELEASE_IMAGE/$IMAGE_NAME
     - docker push "$RELEASE_IMAGE/$IMAGE_NAME${tag}"
+  artifacts:
+    reports:
+      junit: junit.xml
   rules:
     - if: $CI_COMMIT_BRANCH
       exists:
