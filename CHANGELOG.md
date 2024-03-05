@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.1
+
+* Pin cargo component to 0.8.0 until bindings generation workspace is fixed
+
 ## 1.1.0
 
 * Add [Just](https://github.com/casey/just) and [cargo tarpaulin](https://crates.io/crates/cargo-tarpaulin)
