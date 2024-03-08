@@ -52,9 +52,7 @@ RUN \
 
 RUN \
   cargo binstall --no-confirm \
-    cargo-tarpaulin wasm-opt wasm-bindgen-cli ; \
-  cargo binstall --no-confirm \
-    cargo-component --version 0.8.0 ; \
+    cargo-tarpaulin wasm-opt wasm-bindgen-cli cargo-component ; \
   # Just
   cd /var/tmp && curl -sL "$(curl -s https://api.github.com/repos/casey/just/releases/latest | grep browser_download_url | cut -d \" -f4 | grep -E 'x86_64-unknown-linux-musl.tar.gz')" | tar zx ; \
   mv /var/tmp/just /usr/local/bin/ ; \
